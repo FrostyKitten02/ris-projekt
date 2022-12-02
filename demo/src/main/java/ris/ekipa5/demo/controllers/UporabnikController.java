@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ris.ekipa5.demo.repositories.UporabnikRepository;
 import ris.ekipa5.demo.model.Uporabnik;
+import ris.ekipa5.demo.repositories.UporabnikRepository;
 
 @Controller
 @RequestMapping("/uporabnik")

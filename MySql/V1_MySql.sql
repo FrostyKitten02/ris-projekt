@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS uporabnik;
 
 CREATE TABLE uporabnik (
-    id BIGINT NOT NULL UNIQUE,
+    id BIGINT NOT NULL UNIQUE auto_increment,
     ime VARCHAR(255) NOT NULL,
     priimek VARCHAR(255) NOT NULL,
     datum_rojstva DATE,

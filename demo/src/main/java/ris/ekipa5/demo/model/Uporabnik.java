@@ -3,6 +3,8 @@ package ris.ekipa5.demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +17,15 @@ import java.util.Date;
 public class Uporabnik {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="id")
     private Long id;
 
     @Column(name="ime")
     private String ime;
+
+    @Column(name="priimek")
+    private String priimek;
 
     @Column(name="datum_rojstva")
     private Date datumRojstva;

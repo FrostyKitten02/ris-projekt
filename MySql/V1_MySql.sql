@@ -5,6 +5,7 @@ CREATE TABLE uporabnik (
     ime VARCHAR(255) NOT NULL,
     priimek VARCHAR(255) NOT NULL,
     datum_rojstva DATE,
+    zaposleni_od DATE,
     drzavljanstvo VARCHAR(255),
     je_zaposlen BOOLEAN NOT NULL,
     aktiven BOOLEAN NOT NULL,

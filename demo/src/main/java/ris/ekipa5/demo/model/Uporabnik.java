@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -28,7 +29,10 @@ public class Uporabnik {
     private String priimek;
 
     @Column(name="datum_rojstva")
-    private Date datumRojstva;
+    private LocalDate datumRojstva;
+
+    @Column(name="zaposleni_od")
+    private LocalDate datumZaposlitve;
 
     @Column(name="drzavljanstvo")
     private String drzavljanstvo;

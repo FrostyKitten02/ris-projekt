@@ -1,7 +1,6 @@
 package ris.ekipa5.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,7 +48,7 @@ public class UporabnikController {
     }
 
     @DeleteMapping("/{id}")
-    public Uporabnik deleteUporabnik(@PathVariable Long id){
+    public Uporabnik deleteUporabnik(@PathVariable Long id) {
         Optional<Uporabnik> uporabnik = uporabnikDao.findById(id);
         if (uporabnik.isPresent()) {
             uporabnikDao.delete(uporabnik.get());
@@ -59,13 +58,14 @@ public class UporabnikController {
     }
 
     @GetMapping("/aktiven-zaposleni")
-    public Collection<Uporabnik> jeZaposleniInJeAktiven(@RequestParam boolean aktiven, @RequestParam boolean zaposleni){
+    public Collection<Uporabnik> jeZaposleniInJeAktiven(@RequestParam boolean aktiven, @RequestParam boolean zaposleni) {
         return uporabnikDao.uporabnikAktivenZaposlen(aktiven,zaposleni);
     }
 
     @GetMapping("/search")
-    public Collection<Uporabnik> zaposleniRojenDelaOdJeAktiven(@RequestParam boolean aktiven, @RequestParam LocalDate rojenPo, @RequestParam LocalDate delaOd){
+    public Collection<Uporabnik> zaposleniRojenDelaOdJeAktiven(@RequestParam boolean aktiven, @RequestParam LocalDate rojenPo, @RequestParam LocalDate delaOd) {
         return uporabnikDao.search(aktiven, rojenPo, delaOd);
     }
+
 
 }

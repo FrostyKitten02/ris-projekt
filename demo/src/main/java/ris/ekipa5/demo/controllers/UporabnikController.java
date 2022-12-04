@@ -67,5 +67,9 @@ public class UporabnikController {
         return uporabnikDao.search(aktiven, rojenPo, delaOd);
     }
 
+    @GetMapping("/search2")
+    public Collection<Uporabnik> zaposelniImePriimekInJeAktiven(@RequestParam boolean aktiven, @RequestParam String ime, @RequestParam String priimek){
+        return uporabnikDao.search2(aktiven, ime, priimek);
+    }
 
 }

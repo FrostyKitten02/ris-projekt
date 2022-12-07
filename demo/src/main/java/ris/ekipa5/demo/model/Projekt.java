@@ -3,6 +3,7 @@ package ris.ekipa5.demo.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Reference;
 
 import java.util.Collection;
 
@@ -30,7 +31,6 @@ public class Projekt {
     */
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "uporabnik")
     private Uporabnik odgovorni_na_projektu;
 
 }

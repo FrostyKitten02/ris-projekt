@@ -19,6 +19,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Uporabnik {
 
     @Id

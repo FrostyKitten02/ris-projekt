@@ -50,16 +50,14 @@ public class Uporabnik implements UserDetails {
     @Column(name="drzavljanstvo")
     private String drzavljanstvo;
 
-    @Column(name="je_zaposlen")
+    @Column(name="je_zaposlen", nullable = false)
     private boolean jeZaposlen;
-
-    @Column(name="aktiven")
+    @Column(name="aktiven", nullable = false)
     private boolean aktiven;
-
-    @Column(name="geslo")
+    @Column(name="geslo", nullable = false)
     private String geslo;
 
-    @Column(name="email")
+    @Column(name="email", nullable = false)
     private String email;
 
     @ManyToMany

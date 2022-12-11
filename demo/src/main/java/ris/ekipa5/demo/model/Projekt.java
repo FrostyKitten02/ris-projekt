@@ -12,6 +12,7 @@ import java.util.Collection;
 @Entity
 public class Projekt {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 

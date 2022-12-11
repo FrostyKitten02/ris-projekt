@@ -11,6 +11,7 @@ import java.util.Collection;
 @Entity
 public class Projekt {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -30,7 +31,7 @@ public class Projekt {
     */
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "uporabnik")
+    @JoinColumn(name = "uporabnik")
     private Uporabnik odgovorni_na_projektu;
 
 }

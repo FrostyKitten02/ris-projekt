@@ -1,6 +1,8 @@
 package ris.ekipa5.demo.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -63,7 +66,13 @@ public class Uporabnik implements UserDetails {
     private Collection<Vloga>  vloge;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonView
     private Naslov naslov;
+
+    @ManyToMany(mappedBy = "uporabnikiNaProjektu")
+    @JsonIgnore
+    private List<Projekt> projekt;
+
 
 
 

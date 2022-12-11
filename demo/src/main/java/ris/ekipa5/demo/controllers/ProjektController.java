@@ -25,9 +25,9 @@ public class ProjektController {
         return ProjektDao.findById(id);
     }
 
-    @PostMapping("/{id}")
-    public Optional<Projekt> dodajProjekt(@RequestBody Projekt projekt, @PathVariable(name = "id") Long id) {
-        return null;
+    @PostMapping
+    public Projekt dodajProjekt(@RequestBody Projekt projekt) {
+        return ProjektDao.save(projekt);
     }
 
     @DeleteMapping("/{id}")

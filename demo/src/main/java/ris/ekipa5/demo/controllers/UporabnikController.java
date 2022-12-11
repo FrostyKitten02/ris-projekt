@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ris.ekipa5.demo.model.Projekt;
 import ris.ekipa5.demo.model.Uporabnik;
+import ris.ekipa5.demo.model.UporabnikiProjekt;
+import ris.ekipa5.demo.repositories.ProjektRepository;
 import ris.ekipa5.demo.repositories.UporabnikRepository;
+import ris.ekipa5.demo.repositories.UporabnikiProjektRepository;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -28,6 +32,12 @@ public class UporabnikController {
 
     @Autowired
     private UporabnikRepository uporabnikDao;
+
+    @Autowired
+    private ProjektRepository projektDao;
+
+    @Autowired
+    private UporabnikiProjektRepository uporabnikiProjektDao;
 
 
     @GetMapping("/login")
@@ -79,5 +89,21 @@ public class UporabnikController {
     @GetMapping("/search2")
     public Collection<Uporabnik> zaposelniImePriimekInJeAktiven(@RequestParam boolean aktiven, @RequestParam String ime, @RequestParam String priimek){
         return uporabnikDao.search2(aktiven, ime, priimek);
+    }
+
+    @GetMapping("{idUporabnik}/dodaj/na-projekt/{idProjekt}")
+    public void dodajUporabnikaNaProjekt(@PathVariable long idUporabnik, @PathVariable long idProjekt) {
+
+        Optional<Projekt> projekt = projektDao.findById(idProjekt);
+        Optional<Uporabnik> uporabnik = uporabnikDao.findById(idUporabnik);
+
+        if (uporabnik.isEmpty() || projekt.isEmpty()) {
+            //TODO throw error!
+            return;
+        }
+        UporabnikiProjekt uporabnikiProjekt = new UporabnikiProjekt();
+        uporabnikiProjekt.setUporabnik(uporabnik.get());
+        uporabnikiProjekt.setProjekt(projekt.get());
+        uporabnikiProjektDao.save(uporabnikiProjekt);
     }
 }

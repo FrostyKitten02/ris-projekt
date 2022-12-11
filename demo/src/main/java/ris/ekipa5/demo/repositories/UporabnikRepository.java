@@ -8,6 +8,7 @@ import ris.ekipa5.demo.model.Uporabnik;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 public interface UporabnikRepository extends CrudRepository<Uporabnik,Long> {
@@ -17,4 +18,6 @@ public interface UporabnikRepository extends CrudRepository<Uporabnik,Long> {
     Collection<Uporabnik> search(@Param("aktiven") boolean aktiven, @Param("rojenPo") LocalDate rojenPo, @Param("zaposleniOd") LocalDate zaposlenOd);
     @Query("SELECT u FROM Uporabnik as u WHERE u.aktiven = :aktiven AND u.ime = :ime AND u.priimek = :priimek")
     Collection<Uporabnik> search2(@Param("aktiven") boolean aktiven, @Param("ime") String ime, @Param("priimek") String priimek);
+    Optional<Uporabnik> findByUporabniskoIme(String uporabniskoIme);
+    Uporabnik findByEmail(String email);
 }

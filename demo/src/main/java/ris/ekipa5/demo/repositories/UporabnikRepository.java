@@ -19,4 +19,5 @@ public interface UporabnikRepository extends CrudRepository<Uporabnik,Long> {
     @Query("SELECT u FROM Uporabnik as u WHERE u.aktiven = :aktiven AND u.ime = :ime AND u.priimek = :priimek")
     Collection<Uporabnik> search2(@Param("aktiven") boolean aktiven, @Param("ime") String ime, @Param("priimek") String priimek);
     Optional<Uporabnik> findByUporabniskoIme(String uporabniskoIme);
+    Uporabnik findByEmail(String email);
 }

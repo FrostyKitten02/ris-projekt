@@ -14,6 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -23,7 +25,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Uporabnik {
+public class Uporabnik implements UserDetails {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -68,4 +70,39 @@ public class Uporabnik {
             inverseJoinColumns = @JoinColumn(
                     name = "vloga_id", referencedColumnName = "id"))
     private Collection<Vloga>  vloge;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;//TODO!!!
+    }
+
+    @Override
+    public String getPassword() {
+        return this.geslo;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.uporabniskoIme;//TODO maybe return email?
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.aktiven;
+    }
 }

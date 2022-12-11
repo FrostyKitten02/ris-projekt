@@ -36,9 +36,7 @@ public class UporabnikController {
         return false;
     }
 
-    //NEVEM!!!
     @GetMapping
-    @Secured("ROLE_ADMIN")
     public Iterable<Uporabnik> getAll() {
         return uporabnikDao.findAll();
     }

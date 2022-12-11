@@ -1,6 +1,9 @@
 package ris.ekipa5.demo.controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +30,15 @@ public class UporabnikController {
     private UporabnikRepository uporabnikDao;
 
 
+    @GetMapping("/login")
+    public boolean login(){
+
+        return false;
+    }
+
+    //NEVEM!!!
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public Iterable<Uporabnik> getAll() {
         return uporabnikDao.findAll();
     }

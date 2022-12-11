@@ -6,12 +6,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -24,6 +29,9 @@ public class Uporabnik {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="id")
     private Long id;
+
+    @Column(name="uporabniskoIme", unique = true)
+    private String uporabniskoIme;
 
     @Column(name="ime")
     private String ime;
@@ -51,4 +59,13 @@ public class Uporabnik {
 
     @Column(name="email")
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+            name = "uporabnik_vloge",
+            joinColumns = @JoinColumn(
+                    name = "uporabnik_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "vloga_id", referencedColumnName = "id"))
+    private Collection<Vloga>  vloge;
 }

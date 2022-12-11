@@ -2,11 +2,14 @@ package ris.ekipa5.demo.controllers;
 
 import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ris.ekipa5.demo.model.Projekt;
 import ris.ekipa5.demo.repositories.ProjektRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -34,5 +37,18 @@ public class ProjektController {
     public Optional<Projekt> dodajProjekt(@PathVariable(name = "id") Long id) {
         //Optional<Projekt> projekt = ProjektDao.findById(id);
         return ProjektDao.findById(id);
+    }
+
+
+    @GetMapping("/min-uporabnikov/{amount}")
+    public List<Projekt> getProjektPoMinUporabnikih(@PathVariable int amount) {
+        Iterable<Projekt> projekti = ProjektDao.findAll();
+        List<Projekt> res = new ArrayList<>();
+        projekti.forEach(projekt -> {
+            if (projekt.getUporabnikiNaProjektu().size() >= amount) {
+                res.add(projekt);
+            }
+        });
+        return res;
     }
 }

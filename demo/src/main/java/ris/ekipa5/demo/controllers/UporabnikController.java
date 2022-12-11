@@ -80,5 +80,4 @@ public class UporabnikController {
     public Collection<Uporabnik> zaposelniImePriimekInJeAktiven(@RequestParam boolean aktiven, @RequestParam String ime, @RequestParam String priimek){
         return uporabnikDao.search2(aktiven, ime, priimek);
     }
-
 }

@@ -22,7 +22,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests()
+        http.csrf().disable().authorizeHttpRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -52,7 +52,7 @@ public class SecurityConfig {
 
             @Override
             public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                return true;
+                return rawPassword.equals(encodedPassword);
             }
         };
     }

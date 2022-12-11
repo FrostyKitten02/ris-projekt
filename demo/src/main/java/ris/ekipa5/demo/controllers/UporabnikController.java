@@ -21,7 +21,9 @@ import ris.ekipa5.demo.repositories.UporabnikRepository;
 import ris.ekipa5.demo.repositories.UporabnikiProjektRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -105,5 +107,18 @@ public class UporabnikController {
         uporabnikiProjekt.setUporabnik(uporabnik.get());
         uporabnikiProjekt.setProjekt(projekt.get());
         uporabnikiProjektDao.save(uporabnikiProjekt);
+    }
+
+    @GetMapping("/na-min-projektih/{amount}")
+    public List<Uporabnik> uporabnikNaMinPorojektih(@PathVariable int amount) {
+        Iterable<Uporabnik> vsiUporabniki = uporabnikDao.findAll();
+        List<Uporabnik> res = new ArrayList<>();
+
+        vsiUporabniki.forEach(uporabnik -> {
+            if (uporabnik.getProjekti().size() >= amount) {
+                res.add(uporabnik);
+            }
+        });
+        return res;
     }
 }

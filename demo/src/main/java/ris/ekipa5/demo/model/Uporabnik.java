@@ -56,6 +56,7 @@ public class Uporabnik implements UserDetails {
     @Column(name="email", nullable = false)
     private String email;
 
+    //TODO ni vredu povezano!
     @ManyToMany
     @JoinTable(
             name = "uporabnik_vloge",
@@ -71,7 +72,7 @@ public class Uporabnik implements UserDetails {
 
     @ManyToMany(mappedBy = "uporabnikiNaProjektu")
     @JsonIgnore
-    private List<Projekt> projekt;
+    private List<Projekt> projekti;
 
 
 

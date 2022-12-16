@@ -1,8 +1,9 @@
 import React, {useState} from "react";
+import {TextField} from "@mui/material";
 
 
 export default function LoginPage() {
-    const [userName, setUsername] = useState<string>("");
+    const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
 
@@ -13,11 +14,10 @@ export default function LoginPage() {
         <div>
             <h1>Login page</h1>
 
-            <label>Username</label>
-            <input id="username" name="username"></input>
 
-            <label>Username</label>
-            <input id="username" name="username"></input>
+            <TextField value={username} onChange={(event)=>{setUsername(event.target.value)}} />
+
+            <TextField value={password} type="password" onChange={(event)=>{setPassword(event.target.value)}} />
 
         </ div>
     )

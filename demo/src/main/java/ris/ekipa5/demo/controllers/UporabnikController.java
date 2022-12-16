@@ -1,9 +1,6 @@
 package ris.ekipa5.demo.controllers;
-
-import jakarta.annotation.security.RolesAllowed;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+@Slf4j
 @RestController
 @RequestMapping("/uporabnik")
 public class UporabnikController {
@@ -41,12 +39,25 @@ public class UporabnikController {
     @Autowired
     private UporabnikiProjektRepository uporabnikiProjektDao;
 
-
-    @GetMapping("/login")
-    public boolean login(){
-
-        return false;
-    }
+//    @PostMapping("/login")
+//    public void login(HttpServletRequest req, @RequestBody CrideentialsRequest cridentials){
+//        String username = cridentials.getUsername();
+//        String password = cridentials.getPassword();
+//        //checking cridentials
+//        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+//        token.setDetails(new WebAuthenticationDetails(req));
+//        //Authenticating
+//        //Authentication auth = authenticationManager.authenticate(token);
+//        Authentication auth = authenticationProvider.authenticate(token);
+//        log.info("Loggin in with [{}]", auth.getPrincipal());
+//
+//        //setting authentication in security context
+//        SecurityContext securityContext = SecurityContextHolder.getContext();
+//        securityContext.setAuthentication(auth);
+//        //Setting auth token!
+//        HttpSession session = req.getSession();
+//        session.setAttribute("SPRING_SECURITY_CONTEXT_KEY",auth);
+//    }
 
     @GetMapping
     public Iterable<Uporabnik> getAll() {

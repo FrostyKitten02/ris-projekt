@@ -7,8 +7,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -22,11 +21,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.csrf().disable().authorizeHttpRequests()
+        /*http.csrf().disable().authorizeHttpRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
+         */
+
+        //FILTERING /uprabnik/login no auth needed!
+//        http.csrf().disable()
+//                .authorizeHttpRequests()
+//                .requestMatchers(HttpMethod.POST,"/uporabnik/login")
+//                .permitAll();
+        //ANY OTHER REQUEST NEEDS AUTHENTICATION!!
+//        http.csrf().disable().authorizeHttpRequests().anyRequest().denyAll().and().httpBasic();
+
+        http.csrf().disable().authorizeHttpRequests().anyRequest().authenticated().and().httpBasic();
+
         return http.build();
     }
 

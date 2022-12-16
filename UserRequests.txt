@@ -1,3 +1,4 @@
 
 
 http://username:password@localhost:8080/api/v1
+ERROR 406 throw if bad cridentials!!

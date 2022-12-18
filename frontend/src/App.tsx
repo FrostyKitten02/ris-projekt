@@ -1,9 +1,8 @@
-import LoginPage from "./pages/LoginPage";
-
-
+import MyRouter from "./components/MyRouter";
 function App() {
+
   return (
-    <LoginPage />
+      <MyRouter />
   );
 }
 

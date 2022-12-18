@@ -60,7 +60,7 @@ public class ProjektController {
     }
 
     @PostMapping("/search")
-    public List<Projekt> getProjektPoMinUporabnikihInImaOdgovornega(@RequestBody ProjektSearch searchParams) {
+    public List<Projekt> getProjektPoMinUporabnikihInMinDelovnihNalogovInImaOdgovornega(@RequestBody ProjektSearch searchParams) {
         Iterable<Projekt> projekti;
 
         if (searchParams.getSearchString() != null) {
@@ -82,6 +82,13 @@ public class ProjektController {
             if (searchParams.getMinZaposelenih() != null) {
                 int uproabnikiNaProjektu = projekt.getUporabnikiNaProjektu().size();
                 if (uproabnikiNaProjektu <= searchParams.getMinZaposelenih()) {
+                    return;
+                }
+            }
+
+            if (searchParams.getMinDelovnihNalogov() != null) {
+                int delovniNalogiNaProjektu = projekt.getDelovniNalogi().size();
+                if (delovniNalogiNaProjektu <= searchParams.getMinDelovnihNalogov()) {
                     return;
                 }
             }

@@ -13,4 +13,5 @@ public class ProjektSearch {
     private String searchString;
     private Integer minZaposelenih;
     private Boolean imaOdgovornega;
+    private Integer minDelovnihNalogov;
 }

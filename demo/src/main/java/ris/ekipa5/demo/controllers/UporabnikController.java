@@ -1,21 +1,14 @@
 package ris.ekipa5.demo.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ris.ekipa5.demo.model.Projekt;
 import ris.ekipa5.demo.model.Uporabnik;
 import ris.ekipa5.demo.model.UporabnikiProjekt;
 import ris.ekipa5.demo.repositories.ProjektRepository;
 import ris.ekipa5.demo.repositories.UporabnikRepository;
 import ris.ekipa5.demo.repositories.UporabnikiProjektRepository;
+import ris.ekipa5.demo.services.MailSenderService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,6 +20,7 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping("/uporabnik")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UporabnikController {
 
 
@@ -39,6 +33,8 @@ public class UporabnikController {
     @Autowired
     private UporabnikiProjektRepository uporabnikiProjektDao;
 
+    @Autowired
+    private MailSenderService mailSenderService;
 //    @PostMapping("/login")
 //    public void login(HttpServletRequest req, @RequestBody CrideentialsRequest cridentials){
 //        String username = cridentials.getUsername();
@@ -71,7 +67,14 @@ public class UporabnikController {
 
     @PostMapping
     public Uporabnik addUporabnik(@RequestBody Uporabnik uporabnik){
-        return uporabnikDao.save(uporabnik);
+
+        Uporabnik nov = uporabnikDao.save(uporabnik);
+        if (nov.getEmail() != null) {
+            String body = "Uporabnisko ime: " + nov.getUporabniskoIme() + "\n Geslo: " + nov.getGeslo();
+            mailSenderService.sendEmail(nov.getEmail(),"Registracija", body);
+        }
+
+        return nov;
     }
 
     @PutMapping

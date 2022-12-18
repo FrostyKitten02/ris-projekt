@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ris.ekipa5.demo.model.Projekt;
 import ris.ekipa5.demo.repositories.ProjektRepository;
+import ris.ekipa5.demo.request.ProjektSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/projekt")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class ProjektController {
     @Autowired
     private ProjektRepository ProjektDao;
@@ -51,4 +53,37 @@ public class ProjektController {
         });
         return res;
     }
+
+    @PostMapping("/search")
+    public List<Projekt> getProjektPoMinUporabnikihInImaOdgovornega(@RequestBody ProjektSearch searchParams) {
+        Iterable<Projekt> projekti;
+
+        if (searchParams.getSearchString() != null) {
+            projekti = ProjektDao.getProjektByNaziv(searchParams.getSearchString());
+        } else {
+            projekti = ProjektDao.findAll();
+        }
+
+        List<Projekt> res = new ArrayList<>();
+        projekti.forEach(projekt -> {
+            if (searchParams.getImaOdgovornega() != null) {
+                if (searchParams.getImaOdgovornega() && projekt.getOdgovorni_na_projektu() == null) {
+                    return;
+                } else if(projekt.getOdgovorni_na_projektu() != null){
+                    return;
+                }
+            }
+
+            if (searchParams.getMinZaposelenih() != null) {
+                int uproabnikiNaProjektu = projekt.getUporabnikiNaProjektu().size();
+                if (uproabnikiNaProjektu < searchParams.getMinZaposelenih()) {
+                    return;
+                }
+            }
+
+            res.add(projekt);
+        });
+        return res;
+    }
+
 }

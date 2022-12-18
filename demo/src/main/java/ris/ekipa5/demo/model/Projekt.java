@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Reference;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class Projekt {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -36,7 +37,7 @@ public class SecurityConfig {
         //ANY OTHER REQUEST NEEDS AUTHENTICATION!!
 //        http.csrf().disable().authorizeHttpRequests().anyRequest().denyAll().and().httpBasic();
 
-        http.csrf().disable().authorizeHttpRequests().anyRequest().authenticated().and().httpBasic();
+        http.csrf().disable().cors().and().authorizeHttpRequests().anyRequest().authenticated().and().httpBasic();
 
         return http.build();
     }

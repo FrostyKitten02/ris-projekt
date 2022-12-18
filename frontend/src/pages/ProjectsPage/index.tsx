@@ -20,34 +20,23 @@ import SearchBar from "../../components/SearchBar";
 export default function ProjectsPage() {
     const [projects, setProjects] = useState<any[]>([]);
     const [searchString, setSearchString] = useState<string>("");
-    const [hasResposibleEmployee, setHasResponsibleEmployee] = useState<boolean>(false)
-    const [minEmployees, setMinEmployees] = useState<number>(0)
-
+    const [hasResposibleEmployee, setHasResponsibleEmployee] = useState<boolean>(false);
+    const [minEmployees, setMinEmployees] = useState<number>(0);
+    const [minNalogov, setMinNalog] = useState<number>(0);
 
 
     const navigate = useNavigate();
 
-
-    useEffect(()=>{
-        api("","").get("/projekt",{})
-            .then(res=>{
-                const resArr = res.data as unknown as any[];
-                setProjects(resArr);
-            }).catch(err=>{
-                console.error(err);
-            })
-    },[])
-
-
     useEffect(()=>{
         api("","").post("/projekt/search",{
             "searchString": searchString,
-            "minZaposelenih": minEmployees,
-            "imaOdgovornega": hasResposibleEmployee,
+            "minZaposelenih" : minEmployees,
+            "imaOdgovornega" : hasResposibleEmployee?true:null,
+            "minDelovnihNalogov" : minNalogov,
         },{}).then(res=>{
             setProjects(res.data);
         })
-    },[searchString, hasResposibleEmployee, minEmployees])
+    },[searchString, hasResposibleEmployee, minEmployees, minNalogov])
 
     function search(value: string): void {
         console.log("searching! ", value)
@@ -78,6 +67,14 @@ export default function ProjectsPage() {
                         type="number"
                         variant="filled"
                         label="Min zaposlenih"
+                    />,
+                    <TextField
+                        key={uuid()}
+                        value={minNalogov}
+                        onChange={(event)=>{setMinNalog(Number.parseInt(event.target.value))}}
+                        type="number"
+                        variant="filled"
+                        label="Min nalogov"
                     />
                 ]}
             />

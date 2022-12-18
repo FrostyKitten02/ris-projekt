@@ -74,21 +74,21 @@ public class ProjektController {
             if (searchParams.getImaOdgovornega() != null) {
                 if (searchParams.getImaOdgovornega() && projekt.getOdgovorni_na_projektu() == null) {
                     return;
-                } else if(projekt.getOdgovorni_na_projektu() != null){
+                } else if(!searchParams.getImaOdgovornega() && projekt.getOdgovorni_na_projektu() != null){
                     return;
                 }
             }
 
             if (searchParams.getMinZaposelenih() != null) {
                 int uproabnikiNaProjektu = projekt.getUporabnikiNaProjektu().size();
-                if (uproabnikiNaProjektu <= searchParams.getMinZaposelenih()) {
+                if (uproabnikiNaProjektu < searchParams.getMinZaposelenih()) {
                     return;
                 }
             }
 
             if (searchParams.getMinDelovnihNalogov() != null) {
                 int delovniNalogiNaProjektu = projekt.getDelovniNalogi().size();
-                if (delovniNalogiNaProjektu <= searchParams.getMinDelovnihNalogov()) {
+                if (delovniNalogiNaProjektu < searchParams.getMinDelovnihNalogov()) {
                     return;
                 }
             }

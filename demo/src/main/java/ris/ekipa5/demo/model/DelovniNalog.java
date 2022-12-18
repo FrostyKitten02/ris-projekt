@@ -27,6 +27,7 @@ public class DelovniNalog {
     @Column(name="zakljucen")
     private boolean zakljucen;
     @ManyToOne
+    @JoinColumn(name="projekt_id", referencedColumnName = "id")
     @JsonIgnore
     private Projekt projekt;
 

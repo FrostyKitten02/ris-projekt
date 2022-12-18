@@ -41,4 +41,8 @@ public class Projekt {
     @ManyToOne(fetch = FetchType.LAZY)
     private Uporabnik odgovorni_na_projektu;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonView
+    private List<DelovniNalog> delovniNalogi;
+
 }

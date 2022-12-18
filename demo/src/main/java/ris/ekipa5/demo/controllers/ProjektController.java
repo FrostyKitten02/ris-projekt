@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/projekt")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class ProjektController {
     @Autowired
     private ProjektRepository ProjektDao;

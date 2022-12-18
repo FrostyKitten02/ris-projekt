@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -21,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class Uporabnik implements UserDetails {
 
     @Id

@@ -8,6 +8,7 @@ import ris.ekipa5.demo.model.UporabnikiProjekt;
 import ris.ekipa5.demo.repositories.ProjektRepository;
 import ris.ekipa5.demo.repositories.UporabnikRepository;
 import ris.ekipa5.demo.repositories.UporabnikiProjektRepository;
+import ris.ekipa5.demo.services.MailSenderService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class UporabnikController {
     @Autowired
     private UporabnikiProjektRepository uporabnikiProjektDao;
 
+    @Autowired
+    private MailSenderService mailSenderService;
 //    @PostMapping("/login")
 //    public void login(HttpServletRequest req, @RequestBody CrideentialsRequest cridentials){
 //        String username = cridentials.getUsername();
@@ -64,7 +67,14 @@ public class UporabnikController {
 
     @PostMapping
     public Uporabnik addUporabnik(@RequestBody Uporabnik uporabnik){
-        return uporabnikDao.save(uporabnik);
+
+        Uporabnik nov = uporabnikDao.save(uporabnik);
+        if (nov.getEmail() != null) {
+            String body = "Uporabnisko ime: " + nov.getUporabniskoIme() + "\n Geslo: " + nov.getGeslo();
+            mailSenderService.sendEmail(nov.getEmail(),"Registracija", body);
+        }
+
+        return nov;
     }
 
     @PutMapping

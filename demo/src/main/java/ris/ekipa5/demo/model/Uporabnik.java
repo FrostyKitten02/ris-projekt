@@ -54,7 +54,6 @@ public class Uporabnik implements UserDetails {
     @Column(name="aktiven", nullable = false)
     private boolean aktiven;
     @Column(name="geslo", nullable = false)
-    @JsonIgnore
     private String geslo;
 
     @Column(name="email", nullable = false)

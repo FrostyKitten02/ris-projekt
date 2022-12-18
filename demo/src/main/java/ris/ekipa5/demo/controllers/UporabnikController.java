@@ -71,7 +71,7 @@ public class UporabnikController {
         Uporabnik nov = uporabnikDao.save(uporabnik);
         if (nov.getEmail() != null) {
             String body = "Uporabnisko ime: " + nov.getUporabniskoIme() + "\n Geslo: " + nov.getGeslo();
-            mailSenderService.sendEmail(nov.getEmail(),"Registracija", body);
+            mailSenderService.sendEmail(nov.getEmail(),"Registracija", body, "C:\\Users\\Alen\\IdeaProjects\\ris-projekt\\REGISTRACIJA.pdf");
         }
 
         return nov;

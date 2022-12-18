@@ -1,8 +1,11 @@
 package ris.ekipa5.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Reference;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +17,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class Projekt {
     @Id
@@ -39,6 +44,8 @@ public class Projekt {
     private List<Uporabnik> uporabnikiNaProjektu;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="odgovorni_na_projektu_id", referencedColumnName = "id")
+    @JsonView
     private Uporabnik odgovorni_na_projektu;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

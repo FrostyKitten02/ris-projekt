@@ -6,7 +6,9 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ris.ekipa5.demo.model.Projekt;
+import ris.ekipa5.demo.model.Uporabnik;
 import ris.ekipa5.demo.repositories.ProjektRepository;
+import ris.ekipa5.demo.repositories.UporabnikRepository;
 import ris.ekipa5.demo.request.ProjektSearch;
 
 import java.util.ArrayList;
@@ -19,6 +21,9 @@ import java.util.Optional;
 public class ProjektController {
     @Autowired
     private ProjektRepository ProjektDao;
+
+    @Autowired
+    private UporabnikRepository uporabnikDao;
 
     @GetMapping
     public Iterable<Projekt> vrniProjekte() {
@@ -84,6 +89,25 @@ public class ProjektController {
             res.add(projekt);
         });
         return res;
+    }
+
+    @PutMapping("/{projektId}/uporabnik/{uporabnikId}")
+    public void addResponsibleEmployees(@PathVariable Long projektId, @PathVariable Long uporabnikId) {
+        if (uporabnikId == null || uporabnikId == null) {
+            return;
+        }
+
+        Projekt projekt = ProjektDao.findById(projektId).orElse(null);
+        Uporabnik uporabnik = uporabnikDao.findById(uporabnikId).orElse(null);
+
+        if (projekt == null || uporabnik == null) {
+            return;
+        }
+
+        projekt.setOdgovorni_na_projektu(uporabnik);
+
+        ProjektDao.save(projekt);
+
     }
 
 }

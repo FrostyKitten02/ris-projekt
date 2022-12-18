@@ -77,6 +77,8 @@ public class Uporabnik implements UserDetails {
     @JsonIgnore
     private List<Projekt> projekti;
 
+    @OneToMany
+    private List<Projekt> odgovorniNa;
 
 
 

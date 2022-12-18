@@ -76,7 +76,7 @@ public class ProjektController {
 
             if (searchParams.getMinZaposelenih() != null) {
                 int uproabnikiNaProjektu = projekt.getUporabnikiNaProjektu().size();
-                if (uproabnikiNaProjektu < searchParams.getMinZaposelenih()) {
+                if (uproabnikiNaProjektu <= searchParams.getMinZaposelenih()) {
                     return;
                 }
             }

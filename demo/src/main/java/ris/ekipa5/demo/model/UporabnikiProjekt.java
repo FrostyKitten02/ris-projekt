@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Entity
 @Getter
@@ -12,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "uporabniki_projekt")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UporabnikiProjekt {
 
     @Id

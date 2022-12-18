@@ -12,6 +12,7 @@ import org.hibernate.annotations.OnDelete;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -53,6 +54,7 @@ public class Uporabnik implements UserDetails {
     @Column(name="aktiven", nullable = false)
     private boolean aktiven;
     @Column(name="geslo", nullable = false)
+    @JsonIgnore
     private String geslo;
 
     @Column(name="email", nullable = false)
